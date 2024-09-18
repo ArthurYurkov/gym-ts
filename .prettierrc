@@ -9,6 +9,5 @@
     "tabWidth": 4,
     "arrowParens": "avoid",
     "endOfLine": "lf",
-    "proseWrap": "always",
     "plugins": ["prettier-plugin-tailwindcss"]
 }
