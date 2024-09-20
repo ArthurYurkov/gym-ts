@@ -50,7 +50,7 @@ const Benefits = ({ setSelectedPage }: Props) => {
       >
         {/* HEADER */}
         <motion.div
-          className="md:my-5 md:flex md:flex-col md:items-center md:justify-center"
+          className="flex flex-col items-center justify-center md:my-5"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.5 }}

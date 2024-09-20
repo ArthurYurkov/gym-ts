@@ -5,6 +5,7 @@ import Link from './Link';
 import { SelectedPage } from '@/shared/types';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import ActionButton from '@/shared/ActionButton';
+import { motion } from 'framer-motion';
 
 type Props = {
   isTopOfPage: boolean;
@@ -16,7 +17,9 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
   const flexBetween = 'flex items-center justify-between';
   const [isMenuToggled, setIsMenuToggled] = useState<boolean>(false);
   const isAboveMediaScreen = useMediaQuery('(min-width:1060px)');
-  const navbarBackground = isTopOfPage ? '' : 'bg-primary-100 drop-shadow';
+  const navbarBackground = isTopOfPage
+    ? ''
+    : 'bg-primary-100 drop-shadow transition-all rounded-b-[30px]';
 
   return (
     <nav>
@@ -28,7 +31,20 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
             <img alt="logo" src={Logo} className="cursor-pointer" />
             {isAboveMediaScreen ? (
               <div className={`${flexBetween} w-full`}>
-                <div className={`${flexBetween} gap-8 text-sm`}>
+                <motion.div
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.5 }}
+                  transition={{ duration: 0.5 }}
+                  variants={{
+                    hidden: {
+                      opacity: 0,
+                      x: 50,
+                    },
+                    visible: { opacity: 1, x: 0 },
+                  }}
+                  className={`${flexBetween} gap-8 text-sm`}
+                >
                   <Link
                     page="Home"
                     selectedPage={selectedPage}
@@ -52,19 +68,32 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
                     selectedPage={selectedPage}
                     setSelectedPage={setSelectedPage}
                   />
-                </div>
-                <div className={`${flexBetween} gap-8`}>
-                  <button className="text-sm font-bold text-primary-500 underline hover:text-secondary-500">
+                </motion.div>
+                <motion.div
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.5 }}
+                  transition={{ duration: 0.5 }}
+                  variants={{
+                    hidden: {
+                      opacity: 0,
+                      x: -50,
+                    },
+                    visible: { opacity: 1, x: 0 },
+                  }}
+                  className={`${flexBetween} gap-8`}
+                >
+                  <button className="text-sm font-bold text-primary-500 underline transition-all duration-500 hover:text-secondary-500">
                     Sign In
                   </button>
                   <ActionButton setSelectedPage={setSelectedPage}>
                     Become a member
                   </ActionButton>
-                </div>
+                </motion.div>
               </div>
             ) : (
               <button
-                className="rounded-full bg-secondary-500 p-2"
+                className="transition-scale rounded-full bg-secondary-500 p-2 duration-500 hover:scale-110 hover:drop-shadow-md"
                 onClick={() => setIsMenuToggled(!isMenuToggled)}
               >
                 <Bars3Icon className="text h-6 w-6 text-white" />
@@ -75,7 +104,20 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
       </div>
       {/* MOBILE MENU MODAL*/}
       {!isAboveMediaScreen && isMenuToggled && (
-        <div className="fixed bottom-0 right-0 z-40 h-full w-[300px] bg-primary-100 drop-shadow-xl">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ ease: 'easeOut', duration: 0.5 }}
+          variants={{
+            hidden: {
+              opacity: 0,
+              x: 50,
+            },
+            visible: { opacity: 1, x: 0 },
+          }}
+          className="fixed bottom-0 right-0 z-40 h-full w-[300px] bg-primary-100 drop-shadow-xl"
+        >
           {/* CLOSE ICON */}
           <div className="flex justify-end p-12">
             <button onClick={() => setIsMenuToggled(!isMenuToggled)}>
@@ -108,7 +150,7 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
               setSelectedPage={setSelectedPage}
             />
           </div>
-        </div>
+        </motion.div>
       )}
     </nav>
   );
