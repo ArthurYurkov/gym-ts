@@ -50,7 +50,7 @@ const Benefits = ({ setSelectedPage }: Props) => {
       >
         {/* HEADER */}
         <motion.div
-          className="md:my-5 md:w-3/5"
+          className="md:my-5 md:flex md:flex-col md:items-center md:justify-center"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.5 }}
@@ -58,13 +58,13 @@ const Benefits = ({ setSelectedPage }: Props) => {
           variants={{
             hidden: {
               opacity: 0,
-              x: -50,
+              x: 50,
             },
             visible: { opacity: 1, x: 0 },
           }}
         >
           <HText>MORE THAN JUST A GYM.</HText>
-          <p className="my-5 text-sm">
+          <p className="my-5 w-3/5 text-center text-sm">
             We provide world class fitness equipment, trainers and classes to
             get you to your ultimate fitness goals with ease. We provide true
             care into each and every member.
