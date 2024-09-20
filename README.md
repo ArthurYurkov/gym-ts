@@ -1,1 +1,1 @@
-"EVOGYM" Traning project | Vite, React, TS, TailwindCSS, Framer Motion.
+Training project "EVOGYM" (landing page) | Vite, React, TS, TailwindCSS, Framer Motion.
